@@ -1,0 +1,7 @@
+.alert {
+    background-color: green;
+    color: rgb(222, 248, 170);
+    font-size: medium;
+    font-weight: bold;
+    text-transform: capitalize;
+}

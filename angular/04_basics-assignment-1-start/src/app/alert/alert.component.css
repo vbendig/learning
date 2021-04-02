@@ -1,0 +1,13 @@
+.alert {
+    font-size: medium;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.success {
+    background-color: green;
+    color: rgb(222, 248, 170);
+}
+.warning {
+    background-color: rgb(160, 34, 34);
+    color: rgb(246, 185, 179);
+}

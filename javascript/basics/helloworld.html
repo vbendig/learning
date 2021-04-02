@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <script src='app.js'></script> 
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="estilo.css" />
+    </header>
+    <body>
+        <section>
+            <nav class="topnav">
+                <a class="active" href="./helloworld.html">Html</a> 
+                <a href="./estilo.css">Css</a> 
+                <a href="./app.js">Javascript</a> 
+                <a href="/python/">Python</a>
+            </nav>
+        </section>
+        <hr/>
+        <div class="clase1">
+            <p title="helloworld!">hello world!</p>
+        </div>
+        <br/>
+        <div class="clase1">
+            <span title="helloworld!">hello worlds!</p>
+        </div>
+        <br/>
+        <div>
+            <p title="helloworld!">hello world!</p>
+        </div>
+        <br/>   <hr/>    <hr/>
+        <form>
+        <section>
+            <fieldset>
+                <legend>Formulario </legend>
+                <table>
+                    <tr>
+                        <td>Full Name : </td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address : </td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password : </td>
+                        <td><input type="password"/></td>
+                    </tr>
+                    <tr>
+                        <td>DoB : </td>
+                        <td><input type="date"/></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">Gender : </td>
+                    </tr>  
+    
+                    <tr>
+                        <td><input type="radio" name="gender" value="male"/> Male </td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="gender" value="female"/> Fem</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="gender" value="other"/> Other</td>
+                    </tr>
+       
+                    <tr>
+                        <td>Etnia : </td>
+                        <td> 
+                            <input type="checkbox" name="etnia" value="afr"/> Africano
+                            <input type="checkbox" name="etnia" value="asia"/> Asiatico
+                            <input type="checkbox" name="etnia" value="cau"/> Caucasico
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Color Favorito: </td>
+                        <td><input type="color" name="favColor"/></td>
+                    </tr>
+                    <tr>
+                        <td>Subir Archivo</td>
+                        <td><input type="file" name="archivo"/></td>
+                    </tr>
+                    <tr>
+                        <td>Seleccionar mes</td>
+                        <td><input type="month" name="mes"/></td>
+                    </tr>
+                    <tr>
+                        <td>Seleccionar rango</td>
+                        <td><input value="25" type="range" name="rango" min="1" max="100"/></td>
+                    </tr>
+                    <tr>
+                        <td>Buscar :</td>
+                        <td><input value="busqueda..." type="search" name="busqueda"/></td>
+                    </tr>
+                    <tr>
+                        <td>Numero :</td>
+                        <td><input type="number" name="num"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <details>
+                                <summary>Details Epcot Center</summary>
+                                <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events.</p>
+                            </details>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="disk_c">Disk usage C:</label>
+                            <meter id="disk_c" value="2" min="0" max="10">2 out of 10</meter><br>
+                        </td>
+                        <td>
+                            <label for="disk_d">Disk usage D:</label>
+                            <meter id="disk_d" value="0.6">60%</meter>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="cars">Choose a car:</label>
+                        </td>
+                        <td>
+                            <select name="cars" id="cars">
+                              <optgroup label="Swedish Cars">
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                              </optgroup>
+                              <optgroup label="German Cars">
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                              </optgroup>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" colspan="1">
+                            <input type="reset">
+                        </td>
+                        <td style="text-align: center;" colspan="1">
+                            <input type="submit"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </section>
+        </form>
+    </body>
+</html> 
