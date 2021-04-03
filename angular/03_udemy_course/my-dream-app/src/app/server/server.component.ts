@@ -11,9 +11,21 @@ import { randomEnum } from './server.status.enum';
 
 export class ServerComponent {
   serverId: number = Math.floor(Math.random() * 100 + 1);
-  serverStatus: ServerStatus = randomEnum(ServerStatus);
+  serverStatus: ServerStatus;
+
+  constructor(){
+    this.serverStatus = randomEnum(ServerStatus);
+  }
 
   getServerStatus(): ServerStatus {
+    return this.serverStatus;
+  }
+
+  getColor(): string {
+    return (this.serverStatus === ServerStatus.offline)? "red" : "green";
+  }
+
+  getStyles(): string {
     return this.serverStatus;
   }
 }

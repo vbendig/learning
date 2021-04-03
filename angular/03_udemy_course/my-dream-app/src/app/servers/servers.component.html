@@ -1,13 +1,11 @@
 <p>Servers works!</p>
-<app-server></app-server>
-<app-server></app-server>
-
+<app-server *ngFor='let server of servers'></app-server>
 <hr>
 <p>
     Add new Servers:
 </p>
 <label>Server Name</label>
-<input type="text" class="form-control" [(ngModel)]="serverName"/>
+<!-- <input type="text" class="form-control" [(ngModel)]="serverName"/> -->
 <!-- <p>The server name is {{ serverName }}</p> -->
 <input type="text" class="form-control" (input)="onUpdateServerName($event)"/>
 <br>
@@ -15,4 +13,11 @@
     [disabled]='!allowNewServer' 
     class='btn btn-primary'
     (click)="onServerCreate()">Add Server</button>
-<p>{{ serverCreatedStatus }}</p>
+<!-- <p>{{ serverCreatedStatus }}</p> -->
+<br>
+<p>testing testing</p>
+<p *ngIf="serverCreated; else noServer2 ">edsdf  qwewe</p>
+<p>---</p>
+<p *ngIf="serverCreated else noServer ">{{ serverCreatedStatus }}</p>
+<ng-template #noServer>No Server has been created.</ng-template>
+<ng-template #noServer2>No Server2 has been created.</ng-template>
