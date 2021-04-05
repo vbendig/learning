@@ -14,4 +14,18 @@
       </ol>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-game-control (gameEvent)='addEvenOrOdd($event)'></app-game-control>
+    </div>
+  </div>
+  <div class="row" *ngFor='let oneEvent of eventList'>
+    <div class="col-xs-5">
+        <app-even [event]='oneEvent'></app-even>
+        <app-odd [id]='oneEvent.id'></app-odd>
+    </div>
+  </div>
 </div>
+
+
+
