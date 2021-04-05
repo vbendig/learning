@@ -1,0 +1,8 @@
+<div class="row">
+    <div  class="col-xs-12" 
+          [ngStyle]="{backgroundColor: this.getBackgroundColor(myEvent.id)}"
+          [ngClass]="{subsequentItems: myEvent.id >= 5}"
+    >
+      <span>{{ myEvent.id }}</span> New click event: toggle {{ myEvent.action }} ... timestamp: {{myEvent.time}}
+    </div>
+  </div>

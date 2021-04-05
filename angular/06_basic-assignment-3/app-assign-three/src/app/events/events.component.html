@@ -1,0 +1,17 @@
+<div class="container">
+<div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onClick()">Display Details</button>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-xs-12">
+      <p *ngIf="displayParagraph">Secret Password = tuna</p>
+    </div>    
+  </div>
+  <hr>
+  <div *ngFor="let oneEvent of eventArray; let i = index">
+    <app-one-event [myEvent]="oneEvent">  </app-one-event>
+  </div>
+</div>
+
