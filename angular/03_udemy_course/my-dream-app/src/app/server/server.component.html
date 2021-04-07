@@ -1,3 +1,11 @@
 <hr>
 <p>My Server Component</p>
-This server id is {{ serverId }} and it's status is {{ getServerStatus() }} - {{ [1,2] }}
+<p
+    [ngStyle]="{backgroundColor: getColor()}"
+    [ngClass]="getStyles()"
+>
+    <!-- [ngClass]="getStyles()" -->
+    <!-- [ngClass]="{online: serverStatus === 'online'}" -->
+
+    Server id is {{ serverId }} and it's status is {{ getServerStatus() }} - {{ [1,2] }}
+</p> 

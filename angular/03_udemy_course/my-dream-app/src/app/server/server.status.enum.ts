@@ -1,6 +1,6 @@
 export enum ServerStatus{
-    online = "Online",
-    offline = "Offline"
+    online = "online",
+    offline = "offline"
 
 }
 
