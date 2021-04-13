@@ -40,6 +40,7 @@ public class Test {
         products.add(new Tea(5));
         products.add(new Coffee(3));
         products.add(new Cake(4));
+        products.size();
 
 //        ConcurrentModificationException:
 //        for (Product prod: products) {
