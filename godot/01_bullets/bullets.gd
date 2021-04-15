@@ -28,7 +28,7 @@ func _ready():
 
 	shape = Physics2DServer.circle_shape_create()
 	# Set the collision shape's radius for each bullet in pixels.
-	Physics2DServer.shape_set_data(shape, 8)
+	Physics2DServer.shape_set_data(shape, 10)
 
 	for _i in BULLET_COUNT:
 		var bullet = Bullet.new()
@@ -42,8 +42,8 @@ func _ready():
 		# Place bullets randomly on the viewport and move bullets outside the
 		# play area so that they fade in nicely.
 		bullet.position = Vector2(
-			rand_range(0, get_viewport_rect().size.x) + get_viewport_rect().size.x,
-			rand_range(0, get_viewport_rect().size.y)
+			rand_range(0, get_viewport_rect().size.x) ,
+			rand_range(0, get_viewport_rect().size.y)  + get_viewport_rect().size.y
 		)
 		var transform2d = Transform2D()
 		transform2d.origin = bullet.position
@@ -55,11 +55,11 @@ func _ready():
 func _process(delta):
 	var transform2d = Transform2D()
 	for bullet in bullets:
-		bullet.position.x -= bullet.speed * delta
+		bullet.position.y -= bullet.speed * delta
 
-		if bullet.position.x < -16:
+		if bullet.position.y < -16:
 			# The bullet has left the screen; move it back to the right.
-			bullet.position.x = get_viewport_rect().size.x + 16
+			bullet.position.y =  get_viewport_rect().size.y + 16
 
 		transform2d.origin = bullet.position
 
@@ -72,7 +72,7 @@ func _process(delta):
 # Instead of drawing each bullet individually in a script attached to each bullet,
 # we are drawing *all* the bullets at once here.
 func _draw():
-	var offset = -bullet_image.get_size() * 0.5
+	var offset = -bullet_image.get_size() * 0.3
 	for bullet in bullets:
 		draw_texture(bullet_image, bullet.position + offset)
 
