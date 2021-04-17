@@ -25,9 +25,9 @@ animations = [ {
 radius = 27.1585
 height = 13.3867
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 192, 320, 0, 0, 0, 0, 256, 320, 0, 0, 0, 0, 256, 448, 0, 0, 0, 0, 192, 448, 0, 0, 0, 0, 192, 320 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0 )
 }
 
 [node name="Main" type="Node"]
@@ -35,8 +35,6 @@ script = ExtResource( 13 )
 Mob = ExtResource( 14 )
 
 [node name="Player" type="Area2D" parent="."]
-position = Vector2( 3.0052, -2.65165 )
-scale = Vector2( 0.993101, 1.00366 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -64,7 +62,7 @@ one_shot = true
 position = Vector2( 240, 450 )
 
 [node name="MobPath" type="Path2D" parent="."]
-curve = SubResource( 5 )
+curve = SubResource( 3 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]

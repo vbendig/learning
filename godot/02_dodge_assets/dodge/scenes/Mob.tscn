@@ -8,7 +8,7 @@
 [ext_resource path="res://dodge_assets/art/enemyWalking_2.png" type="Texture" id=6]
 [ext_resource path="res://dodge_assets/art/enemyFlyingAlt_2.png" type="Texture" id=7]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
@@ -26,12 +26,11 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 35.54
-height = 28.698
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 32.0
+height = 64.0
 
 [node name="Mob" type="RigidBody2D"]
-position = Vector2( 3.0052, -2.65165 )
 scale = Vector2( 0.5, 0.5 )
 collision_mask = 0
 gravity_scale = 0.0
@@ -42,13 +41,13 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 3 )
+frames = SubResource( 1 )
 animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
