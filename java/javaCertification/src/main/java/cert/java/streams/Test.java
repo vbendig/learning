@@ -184,8 +184,7 @@ public class Test {
 
         //System.out.println(order.toString());
 
-        order
-                .getItems()
+        order.getItems()
                 .stream()
                 .map(item -> item.getProduct())
                 .filter(product -> product.getPrice() > 90)

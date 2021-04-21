@@ -1,16 +1,15 @@
 package cert.java.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Getter
-@Setter
-@AllArgsConstructor
 public class Product{
+    public Product(String name, Double price, LocalDateTime bestBy) {
+        this.name = name;
+        this.price = price;
+        this.bestBy = bestBy;
+    }
+
     private String name;
     private Double price;
     private LocalDateTime bestBy;
@@ -37,5 +36,29 @@ public class Product{
                 ", price=" + price +
                 ", bestBy=" + bestBy.toString() +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public LocalDateTime getBestBy() {
+        return bestBy;
+    }
+
+    public void setBestBy(LocalDateTime bestBy) {
+        this.bestBy = bestBy;
     }
 }

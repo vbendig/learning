@@ -4,6 +4,7 @@ public class Test implements Product, Drink{
     public static void main (String ... args) {
         Product test = new Test();
         test.serve();
+
         Product.staticMethod();
         Drink.staticMethod();
         System.out.println(test.toString());

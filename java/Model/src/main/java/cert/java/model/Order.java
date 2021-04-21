@@ -1,10 +1,5 @@
 package cert.java.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -13,12 +8,30 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Order {
     private UUID uuid = UUID.randomUUID();
     private Set<ItemInterface> items = new HashSet<>();
+
+    public Order(){
+
+    }
+
+    public Set<ItemInterface> getItems() {
+        return items;
+    }
+
+    public Order(UUID uuid, Set<ItemInterface> items) {
+        this.uuid = uuid;
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{ \n ID = " + uuid + "\n" +
+                "total = " + this.getTotal() + "\n" +
+                "items = \n" + items +
+                "}\n";
+    }
 
     public void addItem(Product product, Integer quantity){
         addItem(product, quantity, 0.0);
@@ -37,14 +50,6 @@ public class Order {
         return this.getItemStream().mapToDouble(i -> i.getProduct().getPrice() - i.getProduct().getPrice() * i.getDiscount()).sum();
     }
 
-    @Override
-    public String toString() {
-        return "Order{ \n ID = " + uuid + "\n" +
-                "total = " + this.getTotal() + "\n" +
-                "items = \n" + items +
-                "}\n";
-    }
-
 
     public Stream<ItemInterface> getItemStream(){
         return items.stream();
@@ -60,13 +65,43 @@ public class Order {
         return items.stream().map(i -> i.getProduct()).collect(Collectors.toList());
     }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
     private class Item implements ItemInterface{
         Product product;
         Double discount = 0.0;
         Integer quantity = 0;
+
+        public Item(Product product, Double discount, Integer quantity) {
+            this.product = product;
+            this.discount = discount;
+            this.quantity = quantity;
+        }
+
+        @Override
+        public Product getProduct() {
+            return product;
+        }
+
+        public void setProduct(Product product) {
+            this.product = product;
+        }
+
+        @Override
+        public Double getDiscount() {
+            return discount;
+        }
+
+        @Override
+        public void setDiscount(Double discount) {
+            this.discount = discount;
+        }
+
+        public Integer getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(Integer quantity) {
+            this.quantity = quantity;
+        }
 
         public Double getTotalPrice(){
             return product.getPrice() - product.getPrice() * discount;

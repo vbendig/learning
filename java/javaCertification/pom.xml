@@ -29,6 +29,22 @@
       <version>1.18.20</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>cert.java</groupId>
+      <artifactId>Model</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>10.15.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>7.8.1</version>
+    </dependency>
   </dependencies>
 
   <build>
