@@ -1,0 +1,3 @@
+[submodule "go/udemy/GoCasts"]
+	path = go/udemy/GoCasts
+	url = git@github.com:StephenGrider/GoCasts.git

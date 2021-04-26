@@ -1,7 +1,7 @@
 *.class
 **/node_modules
 **/target
-
+**/.import
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
