@@ -2,6 +2,7 @@ package cert.java.streams;
 
 import cert.java.model.Order;
 import cert.java.model.Product;
+import cert.java.service.OrderService;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -27,10 +28,6 @@ import java.util.stream.Stream;
 
 public class Test {
     List<Order> orders = new ArrayList<>();
-    List<String> productNames = new ArrayList<String>(List.of("Rice", "Bread", "Coffee", "Tea", "Toilet Paper",
-                                                              "Grapes", "Apples", "Oranges", "Detergent", "Tooth Paste",
-                                                              "Beans", "Cherry", "Chocolate", "Potatoes", "Sugar",
-                                                              "Milk", "Eggs", "Butter", "Tomatoes", "Lemon"));
 
     public static void main(String[] args) {
 //        manuallyCreateOrder();
@@ -56,7 +53,7 @@ public class Test {
 
     private static void groupingStreams(){
         Test test = new Test();
-        test.orders = test.createRndmOrders();
+        test.orders = OrderService.createRndmOrders();
         //System.out.println(test.orders);
         Map<Boolean, List<Order>> ordersByProducts = test.orders.stream().collect(Collectors.partitioningBy(order -> order.getProductsStream().count() > 5));
         Map<Long, List<Order>> orderByProdCount = test.orders.stream().collect(Collectors.groupingBy(order -> order.getProductsStream().count()));
@@ -65,7 +62,7 @@ public class Test {
 
         // Vamos a hacer una agrupación de ordenes por producto, es decir, una lista de productos con las ordenes que contengan dicho producto
         Map<String, List<Order>> orderMapManual = new HashMap<>();
-        for (String productName : test.productNames) {
+        for (String productName : OrderService.getProductNames()) {
             List<Order> orderList = test.orders
                     .stream()
                     .filter(order -> order.getProductsStream().filter(product -> product.getName() == productName).count() != 0)
@@ -74,7 +71,7 @@ public class Test {
         }
 
         Map<Object, Object> orderMapAuto = new HashMap<>();
-        orderMapAuto = test.productNames.stream()
+        orderMapAuto = OrderService.getProductNames().stream()
                 .collect(Collectors.toMap(productName -> productName , productName -> test.orders.stream()
                         .filter(order -> order.getProductsStream().filter(product -> product.getName() == productName).count() != 0).collect(Collectors.toList())));
 
@@ -96,7 +93,7 @@ public class Test {
 
         System.out.println(s1);
 
-        String s2 = test.productNames.stream()
+        String s2 = OrderService.getProductNames().stream()
                 .collect(Collectors.collectingAndThen(
                         Collectors.averagingDouble(
                                 p -> (double) p.length()
@@ -105,42 +102,6 @@ public class Test {
                 ));
 
         System.out.println(s2);
-    }
-
-    private List<Product> createProductList(){
-        List<Product> products = new ArrayList<>();
-        int daysBestBy = (int) getRndm(0, 365);
-        int quantityOfProds = (int) getRndm(1, 20);
-        for(int i = 0 ; i < quantityOfProds; i++){
-            double price =  ((int) (getRndm(1, 1000) * 100)) / 100.0;
-            int prodNameRndm = (int) getRndm(0, productNames.size());
-            products.add(new Product(productNames.get(prodNameRndm), price, LocalDateTime.now().plus(daysBestBy, ChronoUnit.DAYS)));
-        }
-        return products;
-    }
-
-    private static double getRndm(int min, int max){
-        return Math.random() * max + min;
-    }
-
-    private Order createRndmOrder(){
-        List<Product> productList = createProductList();
-        int itemQuantityRndm = (int) getRndm(1, 10);
-        int productQuantityRndm = (int) getRndm(1, 10);
-        Order newOrder = new Order();
-        for(int i = 0 ; i < itemQuantityRndm; i++){
-            int prodRndm = (int) getRndm(0, productList.size());
-            newOrder.addItem(productList.get(prodRndm),productQuantityRndm);
-        }
-        return newOrder;
-    }
-
-    private List<Order> createRndmOrders(){
-        int orderQuantity = (int) getRndm(20, 40);
-        int counter = 0;
-        return IntStream.range(0, orderQuantity)
-                .mapToObj(n -> createRndmOrder())
-                .collect(Collectors.toList());
     }
 
     private static void integerExamples() {
@@ -160,7 +121,7 @@ public class Test {
 
     private static void lamdasWithOrders() {
         Test test = new Test();
-        Order order1 = test.createRndmOrder();
+        Order order1 = OrderService.createRndmOrder();
         System.out.println(order1);
         order1.getItemStream().forEach(i -> i.setDiscount(0.1));
         System.out.println(order1);

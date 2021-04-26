@@ -1,9 +1,11 @@
 package cert.java.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Product{
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
     public Product(String name, Double price, LocalDateTime bestBy) {
         this.name = name;
         this.price = price;
@@ -26,7 +28,7 @@ public class Product{
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price);
+        return Objects.hash(name, price, bestBy);
     }
 
     @Override
