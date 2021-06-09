@@ -1,0 +1,140 @@
+{
+    "SecurityGroups": [
+        {
+            "Description": "default group",
+            "GroupName": "default",
+            "IpPermissions": [],
+            "OwnerId": "000000000000",
+            "GroupId": "sg-c906b4e1",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": []
+        },
+        {
+            "Description": "Managed by Terraform",
+            "GroupName": "Allow HTTPS",
+            "IpPermissions": [
+                {
+                    "FromPort": 80,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 80,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 443,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 443,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "000000000000",
+            "GroupId": "sg-b1207c53",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 3306,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 3306,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 80,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 80,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 53,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 53,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 443,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 443,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 25,
+                    "IpProtocol": "TCP",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "ToPort": 25,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": []
+        },
+        {
+            "Description": "default VPC security group",
+            "GroupName": "default",
+            "IpPermissions": [],
+            "OwnerId": "000000000000",
+            "GroupId": "sg-db02dd24",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [],
+            "VpcId": "vpc-5d71951f"
+        }
+    ]
+}

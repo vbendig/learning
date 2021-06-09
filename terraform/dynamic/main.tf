@@ -1,0 +1,75 @@
+provider "aws" {
+  access_key                  = "mock_access_key"
+  region                      = "us-east-2"
+  s3_force_path_style         = true
+  secret_key                  = "mock_secret_key"
+  skip_credentials_validation = true
+  skip_metadata_api_check     = true
+  skip_requesting_account_id  = true
+
+endpoints {
+    apigateway     = "http://localhost:4566"
+    cloudformation = "http://localhost:4566"
+    cloudwatch     = "http://localhost:4566"
+    dynamodb       = "http://localhost:4566"
+    ec2            = "http://localhost:4566"
+    es             = "http://localhost:4566"
+    firehose       = "http://localhost:4566"
+    iam            = "http://localhost:4566"
+    kinesis        = "http://localhost:4566"
+    lambda         = "http://localhost:4566"
+    route53        = "http://localhost:4566"
+    redshift       = "http://localhost:4566"
+    s3             = "http://localhost:4566"
+    secretsmanager = "http://localhost:4566"
+    ses            = "http://localhost:4566"
+    sns            = "http://localhost:4566"
+    sqs            = "http://localhost:4566"
+    ssm            = "http://localhost:4566"
+    stepfunctions  = "http://localhost:4566"
+    sts            = "http://localhost:4566"
+  }
+}
+
+variable "ingressrules" {
+  type = list(number)
+  default = [80,443]
+  
+}
+
+variable "egressrules" {
+  type = list(number)
+  default = [80,443,25,3306,53]
+  
+}
+
+resource "aws_instance" "myec2" {
+    ami = "ami-asdaf"
+    instance_type = "t2.micro"
+    security_groups = [aws_security_group.webtraffic.name]
+}
+
+resource "aws_security_group" "webtraffic" {
+  name= "Allow HTTPS"
+  dynamic "ingress" {
+    iterator = port
+    for_each = var.ingressrules
+    content {
+      cidr_blocks = [ "0.0.0.0/0" ]
+      from_port = port.value
+      protocol = "TCP"
+      to_port = port.value
+    }
+  }
+
+  dynamic "egress" {
+    iterator = port
+    for_each = var.egressrules
+    content {
+      cidr_blocks = [ "0.0.0.0/0" ]
+      from_port = port.value
+      protocol = "TCP"
+      to_port = port.value
+    }
+  }
+}

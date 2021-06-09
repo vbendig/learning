@@ -1,0 +1,318 @@
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-asdaf",
+                    "InstanceId": "i-5177da3a416cb5626",
+                    "InstanceType": "t2.micro",
+                    "KernelId": "None",
+                    "KeyName": "None",
+                    "LaunchTime": "2021-06-04T23:34:55+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-169-233-226.ec2.internal",
+                    "PrivateIpAddress": "10.169.233.226",
+                    "ProductCodes": [],
+                    "PublicDnsName": "None",
+                    "State": {
+                        "Code": 48,
+                        "Name": "terminated"
+                    },
+                    "StateTransitionReason": "User initiated (2021-06-07 20:59:48 UTC)",
+                    "SubnetId": "subnet-e9584eae",
+                    "VpcId": "vpc-5d71951f",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [],
+                    "ClientToken": "ABCDE0000000000003",
+                    "EbsOptimized": false,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2015-01-01T00:00:00+00:00",
+                                "AttachmentId": "eni-attach-6de69371",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "Primary network interface",
+                            "Groups": [],
+                            "MacAddress": "1b:2b:3c:4d:5e:6f",
+                            "NetworkInterfaceId": "eni-6e24d8ea",
+                            "OwnerId": "000000000000",
+                            "PrivateIpAddress": "10.169.233.226",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateIpAddress": "10.169.233.226"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-e9584eae",
+                            "VpcId": "vpc-5d71951f"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [],
+                    "SourceDestCheck": true,
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "VirtualizationType": "paravirtual"
+                }
+            ],
+            "OwnerId": "000000000000",
+            "ReservationId": "r-8293869d"
+        },
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-asdaf",
+                    "InstanceId": "i-44ca77be7d1e39ea0",
+                    "InstanceType": "t2.micro",
+                    "KernelId": "None",
+                    "KeyName": "None",
+                    "LaunchTime": "2021-06-07T20:57:59+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-212-244-145.ec2.internal",
+                    "PrivateIpAddress": "10.212.244.145",
+                    "ProductCodes": [],
+                    "PublicDnsName": "None",
+                    "State": {
+                        "Code": 48,
+                        "Name": "terminated"
+                    },
+                    "StateTransitionReason": "User initiated (2021-06-07 21:02:16 UTC)",
+                    "SubnetId": "subnet-e9584eae",
+                    "VpcId": "vpc-5d71951f",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [],
+                    "ClientToken": "ABCDE0000000000003",
+                    "EbsOptimized": false,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2015-01-01T00:00:00+00:00",
+                                "AttachmentId": "eni-attach-0d36514a",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "Primary network interface",
+                            "Groups": [],
+                            "MacAddress": "1b:2b:3c:4d:5e:6f",
+                            "NetworkInterfaceId": "eni-b4e51556",
+                            "OwnerId": "000000000000",
+                            "PrivateIpAddress": "10.212.244.145",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateIpAddress": "10.212.244.145"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-e9584eae",
+                            "VpcId": "vpc-5d71951f"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [],
+                    "SourceDestCheck": true,
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "VirtualizationType": "paravirtual"
+                }
+            ],
+            "OwnerId": "000000000000",
+            "ReservationId": "r-22c4cee8"
+        },
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-asdaf",
+                    "InstanceId": "i-cf0999cb9668de6b9",
+                    "InstanceType": "t2.micro",
+                    "KernelId": "None",
+                    "KeyName": "None",
+                    "LaunchTime": "2021-06-07T21:03:33+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-163-77-219.ec2.internal",
+                    "PrivateIpAddress": "10.163.77.219",
+                    "ProductCodes": [],
+                    "PublicDnsName": "None",
+                    "State": {
+                        "Code": 48,
+                        "Name": "terminated"
+                    },
+                    "StateTransitionReason": "User initiated (2021-06-07 21:08:32 UTC)",
+                    "SubnetId": "subnet-e9584eae",
+                    "VpcId": "vpc-5d71951f",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [],
+                    "ClientToken": "ABCDE0000000000003",
+                    "EbsOptimized": false,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2015-01-01T00:00:00+00:00",
+                                "AttachmentId": "eni-attach-c81fb603",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "Primary network interface",
+                            "Groups": [],
+                            "MacAddress": "1b:2b:3c:4d:5e:6f",
+                            "NetworkInterfaceId": "eni-a2f08931",
+                            "OwnerId": "000000000000",
+                            "PrivateIpAddress": "10.163.77.219",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateIpAddress": "10.163.77.219"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-e9584eae",
+                            "VpcId": "vpc-5d71951f"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [],
+                    "SourceDestCheck": true,
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "VirtualizationType": "paravirtual"
+                }
+            ],
+            "OwnerId": "000000000000",
+            "ReservationId": "r-c5579326"
+        },
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-asdaf",
+                    "InstanceId": "i-f34b7b57b48ff5ebf",
+                    "InstanceType": "t2.micro",
+                    "KernelId": "None",
+                    "KeyName": "None",
+                    "LaunchTime": "2021-06-07T22:03:08+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-east-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-58-85-38.ec2.internal",
+                    "PrivateIpAddress": "10.58.85.38",
+                    "ProductCodes": [],
+                    "PublicDnsName": "None",
+                    "State": {
+                        "Code": 48,
+                        "Name": "terminated"
+                    },
+                    "StateTransitionReason": "User initiated (2021-06-07 22:07:44 UTC)",
+                    "SubnetId": "subnet-e9584eae",
+                    "VpcId": "vpc-5d71951f",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [],
+                    "ClientToken": "ABCDE0000000000003",
+                    "EbsOptimized": false,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2015-01-01T00:00:00+00:00",
+                                "AttachmentId": "eni-attach-8fef097f",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "Primary network interface",
+                            "Groups": [
+                                {
+                                    "GroupName": "Allow HTTPS",
+                                    "GroupId": "sg-9cc8f054"
+                                }
+                            ],
+                            "MacAddress": "1b:2b:3c:4d:5e:6f",
+                            "NetworkInterfaceId": "eni-7ea64a0e",
+                            "OwnerId": "000000000000",
+                            "PrivateIpAddress": "10.58.85.38",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateIpAddress": "10.58.85.38"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-e9584eae",
+                            "VpcId": "vpc-5d71951f"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "Allow HTTPS",
+                            "GroupId": "sg-9cc8f054"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "VirtualizationType": "paravirtual"
+                }
+            ],
+            "OwnerId": "000000000000",
+            "ReservationId": "r-2af1c368"
+        }
+    ]
+}
