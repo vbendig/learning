@@ -1,3 +1,32 @@
+data "terraform_remote_state" "infra" {
+  backend = "s3"
+
+  config = {
+    bucket   = "amount-shared-cicd-tfstate"
+    region   = "us-east-2"
+    key      = "infra/terraform.tfstate"
+    role_arn = aws_iam_role.OrganizationAccountAccessRole.arn
+  }
+}
+
+data "aws_iam_policy_document" "ads-worker-service-account-trust-policy-document" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(data.terraform_remote_state.infra.outputs.master_info["issuer"], "https://", "")}:sub"
+      values   = ["system:serviceaccount:*:ads-worker-service-account"]
+    }
+
+    principals {
+      identifiers = [data.terraform_remote_state.infra.outputs.master_info["issuer_arn"]]
+      type        = "Federated"
+    }
+  }
+}
+
 data "aws_iam_policy_document" "ads-worker-s3-policy" {
   statement {
     effect = "Allow"

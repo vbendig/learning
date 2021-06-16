@@ -11,3 +11,4 @@ data "aws_iam_policy_document" "custom-s3-policy" {
     resources = ["*"]
   }
 }
+
