@@ -1,3 +1,6 @@
 [submodule "go/udemy/GoCasts"]
 	path = go/udemy/GoCasts
 	url = git@github.com:StephenGrider/GoCasts.git
+[submodule "docker-development-youtube-series"]
+	path = docker-development-youtube-series
+	url = git@github.com:marcel-dempers/docker-development-youtube-series.git
