@@ -13,9 +13,13 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
+	"go.opentelemetry.io/otel/trace"
+	//"go.opentelemetry.io/otel/trace"
+	//"go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama"
 )
 
 type parentContext struct {
@@ -42,10 +46,11 @@ func tracerProvider(url string) (*tracesdk.TracerProvider, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	tp := tracesdk.NewTracerProvider(
 		// Always be sure to batch in production.
 		tracesdk.WithBatcher(exp),
-		// Record information about this application in an Resource.
+		tracesdk.WithSampler(tracesdk.AlwaysSample()),
 		tracesdk.WithResource(resource.NewWithAttributes(
 			semconv.SchemaURL,
 			semconv.ServiceNameKey.String(service),
@@ -57,7 +62,7 @@ func tracerProvider(url string) (*tracesdk.TracerProvider, error) {
 }
 
 func usage() {
-	log.Printf("Usage: nats-sub [-s server] [-creds file] [-t] <subject>\n")
+	log.Printf("Usage: child [-s server] [-creds file] [-t] <subject>\n")
 	flag.PrintDefaults()
 }
 
@@ -71,30 +76,6 @@ func printMsg(m *nats.Msg, i int) {
 }
 
 func main() {
-
-	tp, err := tracerProvider("http://localhost:14268/api/traces")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Register our TracerProvider as the global so any imported
-	// instrumentation in the future will default to using it.
-	otel.SetTracerProvider(tp)
-
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	// Cleanly shutdown and flush telemetry when the application exits.
-	defer func(ctx context.Context) {
-		// Do not make the application hang when it is shutdown.
-		ctx, cancel = context.WithTimeout(ctx, time.Second*5)
-
-		defer cancel()
-		if err := tp.Shutdown(ctx); err != nil {
-			log.Fatal(err)
-		}
-	}(ctx)
-
 	var urls = flag.String("s", nats.DefaultURL, "The nats server URLs (separated by comma)")
 	var userCreds = flag.String("creds", "", "User Credentials File")
 	var showTime = flag.Bool("t", false, "Display timestamps")
@@ -131,28 +112,69 @@ func main() {
 	subj, i := args[0], 0
 
 	nc.Subscribe(subj, func(msg *nats.Msg) {
-		i += 1
-		log.Print(msg.Header.Values("parentSpanId"))
-		log.Print(msg.Header.Values("spanContext"))
-		var spanCtxt parentContext
-		err := json.Unmarshal([]byte(msg.Header.Values("spanContext")[0]), &spanCtxt)
-		log.Print(spanCtxt)
+		tp, err := tracerProvider("http://localhost:14268/api/traces")
 		if err != nil {
 			log.Fatal(err)
 		}
-		ctx := context.Background()
-		ctx = context.WithValue(ctx, "TraceId", spanCtxt.TraceID)
+
+		// Register our TracerProvider as the global so any imported
+		// instrumentation in the future will default to using it.
+		otel.SetTracerProvider(tp)
+		propagator := propagation.NewCompositeTextMapPropagator(propagation.Baggage{}, propagation.TraceContext{})
+		otel.SetTextMapPropagator(propagator)
+
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+
+		// Cleanly shutdown and flush telemetry when the application exits.
+		defer func(ctx context.Context) {
+			// Do not make the application hang when it is shutdown.
+			ctx, cancel = context.WithTimeout(ctx, time.Second*5)
+
+			defer cancel()
+			if err := tp.Shutdown(ctx); err != nil {
+				log.Fatal(err)
+			}
+		}(ctx)
+		//tr := tp.Tracer("ads-validator")
+		i += 1
+		log.Print("ParentSpanId: ", msg.Header.Values("parentSpanId"))
+		log.Print("Span Context from header: ", msg.Header.Values("spanContext"))
+		log.Print("Span Context from header[0]: ", msg.Header.Values("spanContext")[0])
+		spanCtxt := parentContext{}
+		err = json.Unmarshal([]byte(msg.Header.Values("spanContext")[0]), &spanCtxt)
+		log.Print("Span Context config ", spanCtxt)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ctx = context.Background()
+		ctx = context.WithValue(ctx, "TraceID", spanCtxt.TraceID)
 		ctx = context.WithValue(ctx, "SpanID", spanCtxt.SpanID)
 		ctx = context.WithValue(ctx, "TraceFlags", spanCtxt.TraceFlags)
 		ctx = context.WithValue(ctx, "TraceState", spanCtxt.TraceState)
-		ctx = context.WithValue(ctx, "Remote", spanCtxt.Remote)
+		ctx = context.WithValue(ctx, "Remote", false)
 
-		tr := tp.Tracer("message-handler")
+		//tr := tp.Tracer("message-handler")
+		//spanCtx := trace.NewSpanContext(spanCtxtConfig)
+		//span := trace.SpanFromContext(ctx)
+		//_, span := tr.Start(ctx, "messageConsumerSpan")
 
-		ctx, span := tr.Start(ctx, "handler")
-		span.AddEvent("myEvent")
-		span.SetAttributes(attribute.String("environment", environment))
+		//ctx = otel.GetTextMapPropagator().Extract(context.Background(), otelsarama.NewConsumerMessageCarrier(&msg))
+
+		tr := tp.Tracer("consumer")
+		_, span := tr.Start(ctx, "consume message", trace.WithAttributes(
+			semconv.MessagingOperationProcess,
+		))
 		defer span.End()
+
+		log.Print("Is valid:", span.SpanContext().IsValid())
+		spanContextJson, err := span.SpanContext().MarshalJSON()
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("child Span context is : %v", string(spanContextJson))
+		span.End()
+		tp.ForceFlush(ctx)
 		printMsg(msg, i)
 	})
 	nc.Flush()

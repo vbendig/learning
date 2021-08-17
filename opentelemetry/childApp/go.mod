@@ -13,11 +13,12 @@ replace (
 replace go.opentelemetry.io/otel/example/jaeger => ./
 
 require (
-	github.com/nats-io/nats.go v1.11.0 // indirect
+	github.com/nats-io/nats.go v1.11.0
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
-	go.opentelemetry.io/otel v1.0.0-RC1 // indirect
-	go.opentelemetry.io/otel/exporters/jaeger v1.0.0-RC1 // indirect
-	go.opentelemetry.io/otel/sdk v1.0.0-RC1 // indirect
-	go.opentelemetry.io/otel/trace v1.0.0-RC1 // indirect
+	go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama v0.22.0 // indirect
+	go.opentelemetry.io/otel v1.0.0-RC2
+	go.opentelemetry.io/otel/exporters/jaeger v1.0.0-RC1
+	go.opentelemetry.io/otel/sdk v1.0.0-RC2
+	go.opentelemetry.io/otel/trace v1.0.0-RC2
 )

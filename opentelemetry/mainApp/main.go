@@ -24,12 +24,15 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go"
+	"go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/jaeger"
+	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
+	"go.opentelemetry.io/otel/trace"
 )
 
 func usage() {
@@ -41,7 +44,6 @@ func showUsageAndExit(exitcode int) {
 	usage()
 	os.Exit(exitcode)
 }
-
 
 const (
 	service     = "trace-demo"
@@ -62,6 +64,7 @@ func tracerProvider(url string) (*tracesdk.TracerProvider, error) {
 	tp := tracesdk.NewTracerProvider(
 		// Always be sure to batch in production.
 		tracesdk.WithBatcher(exp),
+		tracesdk.WithSampler(tracesdk.AlwaysSample()),
 		// Record information about this application in an Resource.
 		tracesdk.WithResource(resource.NewWithAttributes(
 			semconv.SchemaURL,
@@ -70,6 +73,8 @@ func tracerProvider(url string) (*tracesdk.TracerProvider, error) {
 			attribute.Int64("ID", id),
 		)),
 	)
+	otel.SetTracerProvider(tp)
+	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}))
 	return tp, nil
 }
 
@@ -79,9 +84,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Register our TracerProvider as the global so any imported
-	// instrumentation in the future will default to using it.
-	otel.SetTracerProvider(tp)
+	// // Register our TracerProvider as the global so any imported
+	// // instrumentation in the future will default to using it.
+	// otel.SetTracerProvider(tp)
+	// propagator := propagation.NewCompositeTextMapPropagator(propagation.Baggage{}, propagation.TraceContext{})
+	// otel.SetTextMapPropagator(propagator)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -97,25 +104,24 @@ func main() {
 		}
 	}(ctx)
 
+	tr := tp.Tracer("ads-manager")
 
-	tr := tp.Tracer("component-main")
-
-	ctx, span := tr.Start(ctx, "foo")
+	ctx, span := tr.Start(ctx, "parent-span")
 	defer span.End()
-	sendMessage(ctx)
+	sendMessage(ctx, span)
 }
 
-func sendMessage(ctx context.Context) {
+func sendMessage(ctx context.Context, parent trace.Span) {
 	// Use the global TracerProvider.
-	tr := otel.Tracer("component-bar")
-	_, span := tr.Start(ctx, "bar")
+	tr := otel.Tracer("ads-manager-message-producer")
+	_, span := tr.Start(ctx, "child-span-message")
 	span.SetAttributes(attribute.Key("testset").String("value"))
 	spanId := span.SpanContext().SpanID()
-	spanContextJson, err := span.SpanContext().MarshalJSON()
+	spanContextJson, err := parent.SpanContext().MarshalJSON()
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Print(spanContextJson)
+	log.Printf("Span context is : %v", string(spanContextJson))
 	defer span.End()
 	var urls = flag.String("s", nats.DefaultURL, "The nats server URLs (separated by comma)")
 	var userCreds = flag.String("creds", "", "User Credentials File")
@@ -149,9 +155,11 @@ func sendMessage(ctx context.Context) {
 	}
 	defer nc.Close()
 	subj, body := args[0], []byte(args[1])
-	header := &nats.Header{"parentSpanId" : []string{spanId.String()}}
+	header := &nats.Header{"parentSpanId": []string{spanId.String()}}
 	header.Add("spanContext", string(spanContextJson))
 	msg := &nats.Msg{Subject: subj, Header: *header, Data: body}
+	otel.GetTextMapPropagator().Inject(ctx, otelsarama.NewProducerMessageCarrier(&msg))
+
 	nc.PublishMsg(msg)
 
 	nc.Flush()
