@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"github.com/nats-io/nats.go"
-	"go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama"
+	//"go.opentelemetry.io/contrib/instrumentation/github.com/Shopify/sarama/otelsarama"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/exporters/jaeger"
@@ -158,7 +158,7 @@ func sendMessage(ctx context.Context, parent trace.Span) {
 	header := &nats.Header{"parentSpanId": []string{spanId.String()}}
 	header.Add("spanContext", string(spanContextJson))
 	msg := &nats.Msg{Subject: subj, Header: *header, Data: body}
-	otel.GetTextMapPropagator().Inject(ctx, otelsarama.NewProducerMessageCarrier(&msg))
+	//otel.GetTextMapPropagator().Inject(ctx, otelsarama.NewProducerMessageCarrier(&msg))
 
 	nc.PublishMsg(msg)
 
