@@ -4,3 +4,9 @@
 [submodule "docker-development-youtube-series"]
 	path = docker-development-youtube-series
 	url = git@github.com:marcel-dempers/docker-development-youtube-series.git
+[submodule "opentelemetry-go-contrib"]
+	path = opentelemetry-go-contrib
+	url = git@github.com:open-telemetry/opentelemetry-go-contrib.git
+[submodule "terraform-course"]
+	path = terraform-course
+	url = https://github.com/wardviaene/terraform-course
