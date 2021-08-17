@@ -1,4 +1,3 @@
-opentelemetry/childApp/child
 *.class
 **/node_modules
 **/target
