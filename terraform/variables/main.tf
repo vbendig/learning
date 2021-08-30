@@ -31,6 +31,17 @@ endpoints {
   }
 }
 
+variable "hello" {
+  type = string
+  default = "Hello World!"
+}
+
+variable "mymap1" {
+  type = map(string)
+  default = {
+	mykey = "my value"}
+}
+
 variable "vpcname" {
   type = string
   default = "myvpc"
