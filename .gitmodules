@@ -10,3 +10,6 @@
 [submodule "terraform-course"]
 	path = terraform-course
 	url = https://github.com/wardviaene/terraform-course
+[submodule "terraform-beginner-to-advanced-resource"]
+	path = terraform-beginner-to-advanced-resource
+	url = https://github.com/zealvora/terraform-beginner-to-advanced-resource
