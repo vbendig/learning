@@ -1,10 +1,10 @@
-provider aws {
+provider "aws" {
   shared_credentials_file = "~/.aws/credentials"
   profile                 = "vbendig"
-  region = var.region
+  region                  = var.region
 }
 
 provider "google" {
-  project     = "my-project-id"
-  region      = "us-central1"
+  project = "my-project-id"
+  region  = "us-central1"
 }
