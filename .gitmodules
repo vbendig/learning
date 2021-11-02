@@ -13,3 +13,6 @@
 [submodule "terraform-beginner-to-advanced-resource"]
 	path = terraform-beginner-to-advanced-resource
 	url = https://github.com/zealvora/terraform-beginner-to-advanced-resource
+[submodule "vault-guides"]
+	path = vault-guides
+	url = git@github.com:/hashicorp/vault-guides.git
